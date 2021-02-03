@@ -27,9 +27,9 @@
   become_user: aur_builder
 
 - name: Install packages from pacman
+  become: yes
   pacman:
     state: present
-    become: yes
     name:
       - xorg-server
       - xorg-xwininfo
