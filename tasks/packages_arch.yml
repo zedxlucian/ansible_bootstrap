@@ -104,3 +104,27 @@
       - openbsd-netcat
       - ebtables
       - iptables
+
+- name: Install dwm from private git repo
+  git:
+    repo: https://git.suckless.org/dwm.git
+    version: master
+    dest: /home/lydien/.local/src/dwm
+    accept_hostkey: yes
+    become: no
+
+- name: Install dmenu from private git repo
+  git:
+    repo: https://git.suckless.org/dmenu.git
+    version: master
+    dest: /home/lydien/.local/src/dmenu
+    accept_hostkey: yes
+    become: no
+
+- name: Install st from private git repo
+  git:
+    repo: https://git.suckless.org/st.git
+    version: master
+    dest: /home/lydien/.local/src/st
+    accept_hostkey: yes
+    become: no
