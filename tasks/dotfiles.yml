@@ -1,7 +1,7 @@
 - name: Clone dotfiles git repo and install
+  become: no
   git:
     repo: git@github.com:zedxlucian/dotfiles.github
     version: master
     dest: /home/lydien/dotfiles
     accept_hostkey: yes
-    become: no
