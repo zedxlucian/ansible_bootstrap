@@ -2,7 +2,23 @@
   connection: local
   become: true
 
+  pre_tasks:
+    - name: update repositories
+      package:
+        update_cache: yes
+      changed_when: False
+
+    - name: Add system user to install AUR packages
+      name: aur_builder
+      create_home: no
+      group: wheel
+    - lineinfile:
+      path: /etc/sudoers.d/11-installer-aur_builder
+      line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+      create: yes
+      validate: 'visudo -cf %s'
+      when: ansible_distribution == "ArchLinux"
+
   tasks:
-  - name: Install htop
-    package:
-      name: htop
+    - include: tasks/packages_workstation.yml
+      when: ansible_distribution == "ArchLinux"
