@@ -17,7 +17,6 @@
       - chromium-widevine
       - pass-tomb
       - pass-import
-      - libxft-bgra
       - npspot
       - cryptomator
       - python-adblock
