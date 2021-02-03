@@ -20,8 +20,8 @@
         line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
         create: yes
         validate: 'visudo -cf %s'
-      when: ansible_distribution == "ArchLinux"
+      when: ansible_distribution == "Archlinux"
 
   tasks:
     - include: tasks/packages_arch.yml
-      when: ansible_distribution == "ArchLinux"
+      when: ansible_distribution == "Archlinux"
