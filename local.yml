@@ -9,8 +9,8 @@
       changed_when: False
   tasks:
     - include: tasks/users.yml
-    - include: tasks/cron.yml
     - include: tasks/packages_arch.yml
       when: ansible_distribution == "Archlinux"
+    - include: tasks/cron.yml
     - include: tasks/dotfiles.yml
       when: ansible_distribution == "Archlinux"

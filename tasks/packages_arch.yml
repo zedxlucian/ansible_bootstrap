@@ -1,5 +1,6 @@
 - name: Install packages from AUR
   aur:
+    state: present
     use: paru
     name:
       - qutebrowser-git
@@ -22,12 +23,13 @@
       - python-adblock
       - qbittorrent
       - libguestfs
-    state: present
   become: yes
   become_user: aur_builder
 
 - name: Install packages from pacman
   pacman:
+    state: present
+    become: yes
     name:
       - xorg-server
       - xorg-xwininfo
