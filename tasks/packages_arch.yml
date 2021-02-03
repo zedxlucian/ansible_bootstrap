@@ -127,4 +127,4 @@
     version: master
     dest: /home/lydien/.local/src/st
     accept_hostkey: yes
-    become: no
+ become: no
