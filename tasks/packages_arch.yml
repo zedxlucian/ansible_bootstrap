@@ -5,7 +5,6 @@
       - qutebrowser-git
       - zsh-autosuggestions
       - zsh-fast-syntax-highlighting
-      - task-spooler
       - betterlockscreen
       - zsh-theme-powerlevel10k-git
       - megasync-bin
