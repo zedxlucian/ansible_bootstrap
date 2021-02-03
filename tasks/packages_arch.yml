@@ -110,21 +110,23 @@
     repo: https://git.suckless.org/dwm
     version: master
     dest: /home/lydien/.local/src/dwm
-    accept_hostkey: yes
-  become: no
 
 - name: Install dmenu from private git repo
   git:
     repo: https://git.suckless.org/dmenu
     version: master
     dest: /home/lydien/.local/src/dmenu
-    accept_hostkey: yes
-  become: no
 
 - name: Install st from private git repo
   git:
     repo: https://git.suckless.org/st
     version: master
     dest: /home/lydien/.local/src/st
-    accept_hostkey: yes
-  become: no
+
+- name: Change ownership of git repos
+  file:
+    path: "/home/lydien/.local/src"
+    owner: "lydien"
+    group: "wheel"
+    state: directory
+    recurse: yes
