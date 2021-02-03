@@ -17,7 +17,7 @@
       - chromium-widevine
       - pass-tomb
       - pass-import
-      - npspot
+      - ncspot-git
       - cryptomator
       - python-adblock
       - qbittorrent
