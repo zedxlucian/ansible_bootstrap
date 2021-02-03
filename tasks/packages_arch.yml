@@ -111,7 +111,7 @@
     version: master
     dest: /home/lydien/.local/src/dwm
     accept_hostkey: yes
-    become: no
+  become: no
 
 - name: Install dmenu from private git repo
   git:
@@ -119,7 +119,7 @@
     version: master
     dest: /home/lydien/.local/src/dmenu
     accept_hostkey: yes
-    become: no
+  become: no
 
 - name: Install st from private git repo
   git:
