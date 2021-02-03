@@ -7,39 +7,10 @@
       package:
         update_cache: yes
       changed_when: False
-
-    - name: Create lydien user
-      user:
-        name: lydien
-        create_home: yes
-        group: wheel
-        shell: /usr/bin/zsh
-        generate_ssh_key: yes
-        ssh_key_type: ed25519
-      when: ansible_distribution == "Archlinux"
-
-    - name: Setting git configuration for user:lydien
-      copy:
-        src: git_config_lydien
-        dest: /home/lydien/.gitconfig
-        owner: lydien
-        group: wheel
-        mode: '0644'
-
-    - name: Create aur_builder user to install AUR packages
-      user:
-        name: aur_builder
-        create_home: yes
-        group: wheel
-
-    - name: Add aur_builder as sudoer
-      lineinfile:
-        path: /etc/sudoers.d/11-installer-aur_builder
-        line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-        create: yes
-        validate: 'visudo -cf %s'
-      when: ansible_distribution == "Archlinux"
-
   tasks:
+    - include: tasks/users.yml
+    - include: tasks/cron.yml
     - include: tasks/packages_arch.yml
+      when: ansible_distribution == "Archlinux"
+    - include: tasks/dotfiles.yml
       when: ansible_distribution == "Archlinux"
