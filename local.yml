@@ -3,22 +3,25 @@
   become: true
 
   pre_tasks:
-    - name: update repositories
+    - name: Update repositories
       package:
         update_cache: yes
       changed_when: False
 
-    - name: Add system user to install AUR packages
-      name: aur_builder
-      create_home: no
-      group: wheel
-    - lineinfile:
-      path: /etc/sudoers.d/11-installer-aur_builder
-      line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-      create: yes
-      validate: 'visudo -cf %s'
+    - name: Create aur_builder user to install AUR packages
+      user:
+        name: aur_builder
+        create_home: no
+        group: wheel
+
+    - name: Add aur_builder as sudoer
+      lineinfile:
+        path: /etc/sudoers.d/11-installer-aur_builder
+        line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: yes
+        validate: 'visudo -cf %s'
       when: ansible_distribution == "ArchLinux"
 
   tasks:
-    - include: tasks/packages_workstation.yml
+    - include: tasks/packages_arch.yml
       when: ansible_distribution == "ArchLinux"
