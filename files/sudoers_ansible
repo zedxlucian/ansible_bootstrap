@@ -1,1 +1,1 @@
-ansible ALL=(ALL) NOPASSWD: /usr/bin/ansible-pull,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/pacman -Syy --noconfirm,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/pacman -Syu
+ansible ALL=(ALL) NOPASSWD: /usr/bin/ansible-pull -o -U,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/pacman -Syy --noconfirm,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/pacman -Syu
