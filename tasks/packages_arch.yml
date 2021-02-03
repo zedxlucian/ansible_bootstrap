@@ -107,7 +107,7 @@
 
 - name: Install dwm from private git repo
   git:
-    repo: https://git.suckless.org/dwm.git
+    repo: https://git.suckless.org/dwm
     version: master
     dest: /home/lydien/.local/src/dwm
     accept_hostkey: yes
@@ -115,7 +115,7 @@
 
 - name: Install dmenu from private git repo
   git:
-    repo: https://git.suckless.org/dmenu.git
+    repo: https://git.suckless.org/dmenu
     version: master
     dest: /home/lydien/.local/src/dmenu
     accept_hostkey: yes
@@ -123,7 +123,7 @@
 
 - name: Install st from private git repo
   git:
-    repo: https://git.suckless.org/st.git
+    repo: https://git.suckless.org/st
     version: master
     dest: /home/lydien/.local/src/st
     accept_hostkey: yes
