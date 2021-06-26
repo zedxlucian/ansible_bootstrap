@@ -1,3 +1,4 @@
+---
 - name: Create lydien user
   user:
     name: lydien
