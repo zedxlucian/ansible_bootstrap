@@ -1,103 +1,60 @@
 ---
-- name: Install packages from AUR
-  aur:
-    state: present
-    use: paru
-    name:
-      - qutebrowser-git
-      - zsh-autosuggestions
-      - zsh-fast-syntax-highlighting
-      - betterlockscreen
-      - zsh-theme-powerlevel10k-git
-      - megasync-bin
-      - checkupdates+aur
-      - bitwarden-bin
-      - caffeine-ng
-      - arc-gtk-theme
-      - pam-gnupg
-      - plymouth
-      - chromium-widevine
-      - pass-tomb
-      - pass-import
-      - ncspot-git
-      - cryptomator
-      - python-adblock
-      - qbittorrent
-      - libguestfs
+- name: Install base-devel to be able to install aur packages
   become: yes
-  become_user: aur_builder
+  pacman: state=present name=base-devel
+
+- name: Install login manager lightdm
+  become: yes
+  pacman: state=present name=lightdm,lightdm-slick-greeter
+
+- name: Use lightdm-slick-greeter as default greeter for lightdm
+  become: yes
+  shell: |
+    sed -i '/\[Seat\:\*\]/a greeter-session=lightdm-slick-greeter' /etc/lightdm/lightdm.conf
+  notify: enable lightdm
 
 - name: Install packages from pacman
   become: yes
   pacman:
     state: present
     name:
-      - xorg-server
-      - xorg-xwininfo
-      - xorg-xinit
-      - xorg-xsetroot
-      - arandr
-      - picom
-      - xorg-xprop
+      - xfce4
+      - xfce4-goodies
       - dosfstools
-      - libnotify
       - dunst
       - exfat-utils
       - sxiv
       - nitrogen
-      - gnome-keyring
       - man-db
       - noto-fonts-emoji
       - noto-fonts-cjk
       - ntfs-3g
-      - pulseaudio-alsa
-      - pulsemixer
-      - pamixer
       - maim
       - socat
-      - unclutter
       - unrar
       - unzip
-      - xclip
-      - xdotool
-      - xorg-xdpyinfo
       - youtube-dl
-      - zathura
-      - zathura-pdf-mupdf
       - poppler
       - mediainfo
       - atool
       - fzf
-      - highlight
-      - xorg-xbacklight
       - fd
       - ripgrep
       - shellcheck
-      - xss-lock
       - mlocate
       - neovim
       - emacs
-      - lxappearance
       - mpv
       - exa
-      - xorg-xev
       - neofetch
       - terminus-font
       - ttf-roboto
       - ttf-roboto-mono
-      - numlockx
       - pacman-contrib
-      - xwallpaper
       - editorconfig-core-c
       - pandoc
       - graphviz
-      - python-isort
-      - pyenv
-      - python-nose
-      - python-pytest
-      - python-pipenv
       - npm
-      - pass
       - qemu
       - virt-manager
       - virt-viewer
@@ -105,32 +62,18 @@
       - vde2
       - bridge-utils
       - openbsd-netcat
-      - ebtables
       - iptables
       - cronie
+      - firefox
 
-- name: Install dwm from private git repo
-  git:
-    repo: https://git.suckless.org/dwm
-    version: master
-    dest: /home/lydien/.local/src/dwm
-
-- name: Install dmenu from private git repo
-  git:
-    repo: https://git.suckless.org/dmenu
-    version: master
-    dest: /home/lydien/.local/src/dmenu
-
-- name: Install st from private git repo
-  git:
-    repo: https://git.suckless.org/st
-    version: master
-    dest: /home/lydien/.local/src/st
-
-- name: Change ownership of git repos
-  file:
-    path: "/home/lydien/.local/src"
-    owner: "lydien"
-    group: "wheel"
-    state: directory
-    recurse: yes
+- name: Install packages from AUR
+  become: yes
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    state: present
+    name:
+      - zsh-autosuggestions
+      - zsh-fast-syntax-highlighting
+      - i3lock-color-git
+      - betterlockscreen
+      - arc-gtk-theme-git

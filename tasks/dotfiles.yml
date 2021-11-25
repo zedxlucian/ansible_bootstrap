@@ -1,8 +1,8 @@
 ---
 - name: Clone dotfiles git repo and install
-  become: no
+  become: yes
+  become_user: lydien
   git:
-    repo: git@github.com:zedxlucian/dotfiles.github
+    repo: https://github.com/zedxlucian/dotfiles
     version: master
     dest: /home/lydien/dotfiles
-    accept_hostkey: yes
