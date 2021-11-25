@@ -5,8 +5,6 @@
     create_home: yes
     group: wheel
     shell: /usr/bin/zsh
-    generate_ssh_key: yes
-    ssh_key_type: ed25519
   when: ansible_distribution == "Archlinux"
 
 - name: copy sudoers_lydien
