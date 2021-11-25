@@ -1,0 +1,41 @@
+---
+
+- name: Clone Doom Emacs repo locally.
+  become: yes
+  become_user: lydien
+  git:
+    repo: https://github.com/hlissner/doom-emacs
+    dest: "/home/lydien/.emacs.d"
+
+- name: Create Doom directory for our private config
+  become: yes
+  become_user: lydien
+  shell: |
+    mkdir -p "/home/lydien/.config/doom"
+
+- name: Copy private config from dotfiles to doom directory
+  become: yes
+  become_user: lydien
+  copy:
+    src: "/home/lydien/dotfiles/config/.config/doom"
+    dest: "/home/lydien/.config/"
+    directory_mode: true
+    remote_src: yes
+
+- name: Run Doom sync to synchronize Doom with the private config
+  become: yes
+  become_user: lydien
+  shell: |
+    /home/lydien/.emacs.d/bin/doom sync
+
+- name: Run Doom env to generate environment variables for Emacs
+  become: yes
+  become_user: lydien
+  shell: |
+    /home/lydien/.emacs.d/bin/doom env
+
+# - name: Install icon fonts Doom uses
+#   become: yes
+#   become_user: lydien
+#   shell: |
+#     emacs --batch -f all-the-icons-install-fonts
