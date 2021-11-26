@@ -9,7 +9,7 @@
   become_user: lydien
   file:
     path: /home/lydien/.local/{{ item }}
-    mode: directory
+    state: directory
   with_items:
     - bin
     - share
