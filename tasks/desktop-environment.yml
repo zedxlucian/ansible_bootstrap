@@ -39,3 +39,4 @@
   become_user: lydien
   shell: |
     /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/airim-dark.knsv
+    /home/lydien/.local/bin/konsave -a airim-dark
