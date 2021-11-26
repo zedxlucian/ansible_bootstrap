@@ -17,6 +17,8 @@
     recurse: yes
 
 - name: Install yay
+  become: yes
+  become_user: lydien
   shell: |
     cd /opt/yay && makepkg -si --noconfirm
 
@@ -74,5 +76,7 @@
       - stow
 
 - name: Install zsh-autosuggestions from AUR
+  become: yes
+  become_user: lydien
   shell: |
     yay -S zsh-autosuggestions zsh-fast-syntax-highlighting betterlockscreen arc-gtk-theme-git --noconfirm
