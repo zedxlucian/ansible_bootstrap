@@ -32,6 +32,14 @@
     git lfs install
     git lfs pull
 
+- name: Copy konsave profile locally
+  become: yes
+  become_user: lydien
+  copy:
+    src: /home/lydien/ansible_bootstrap/files/aritim-dark.knsv
+    dest: /home/lydien/.local/share/aritim-dark.knsv
+    force: no
+
 - name: launch konsave to install KDE configuration
   become: yes
   become_user: lydien
