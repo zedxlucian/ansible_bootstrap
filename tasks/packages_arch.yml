@@ -6,7 +6,7 @@
 
 - name: Clone yay repo from Archlinux
   become: yes
-  git: repo=https://aur.archlinux.org/yay.git dest: /opt
+  git: repo=https://aur.archlinux.org/yay.git dest=/opt
 
 - name: Give ownership to yay repo to user
   become: yes
