@@ -14,6 +14,7 @@
     - bin
     - share
     - src
+    - share/applications
 
 - name: Install konsave
   become: yes
