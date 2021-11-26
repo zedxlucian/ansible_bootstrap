@@ -2,8 +2,7 @@
 
 - name: Install base-devel to be able to install aur packages
   become: yes
-  package: state=present name=base-devel
-  check_mode: true
+  pacman: state=present name=base-devel
   register: basedevel_check
 
 
