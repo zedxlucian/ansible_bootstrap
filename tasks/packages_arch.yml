@@ -11,7 +11,7 @@
 - name: Give ownership to yay repo to user
   become: yes
   file:
-    src: /opt/yay
+    path: /opt/yay
     owner: lydien
     group: users
     recurse: yes
