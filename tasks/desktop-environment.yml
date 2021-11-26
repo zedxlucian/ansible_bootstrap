@@ -36,7 +36,7 @@
   become: yes
   become_user: lydien
   copy:
-    src: /home/lydien/ansible_bootstrap/files/aritim-dark.knsv
+    src: files/aritim-dark.knsv
     dest: /home/lydien/.local/share/aritim-dark.knsv
     force: no
 
