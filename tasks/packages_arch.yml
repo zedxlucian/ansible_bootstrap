@@ -23,7 +23,8 @@
   become: yes
   become_user: lydien
   shell: |
-    cd /opt/yay && makepkg -si --noconfirm
+    cd /opt/yay
+    makepkg -si --noconfirm
   when: not basedevel_check.changed
 
 - name: Install packages from pacman
