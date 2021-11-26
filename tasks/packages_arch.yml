@@ -32,15 +32,9 @@
   pacman:
     state: present
     name:
-      - plasma
       - dosfstools
-      - dunst
       - exfat-utils
-      - sxiv
-      - nitrogen
       - man-db
-      - noto-fonts-emoji
-      - noto-fonts-cjk
       - ntfs-3g
       - maim
       - socat
