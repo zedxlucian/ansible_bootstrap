@@ -25,7 +25,7 @@
   shell: |
     cd /opt/yay
     makepkg -si --noconfirm
-  when: not basedevel_check.changed
+  when: basedevel_check.changed
 
 - name: Install packages from pacman
   become: yes
