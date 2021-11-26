@@ -33,4 +33,4 @@
   become_user: lydien
   file:
     path: /home/lydien/.cache/zsh
-    state: present
+    state: directory
