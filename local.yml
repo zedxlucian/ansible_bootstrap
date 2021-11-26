@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   connection: local
-  become: true
+  become: yes
 
   pre_tasks:
     - name: Update repositories
@@ -16,7 +16,4 @@
     - include_tasks: tasks/dotfiles.yml
       when: ansible_distribution == "Archlinux"
     - include_tasks: tasks/doom-emacs.yml
-
-  handlers:
-    - name: enable lightdm
-      systemd: name=lightdm enabled=yes
+    - include_tasks: tasks/desktop-environment..yml
