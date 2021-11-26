@@ -7,8 +7,13 @@
 - name: Create bin, share and src directory in home/.local
   become: yes
   become_user: lydien
-  shell: |
-    mkdir -p "/home/lydien/.local/{bin,share,src}"
+  file:
+    path: /home/lydien/.local/{{ item }}
+    mode: directory
+  with_items:
+    - bin
+    - share
+    - src
 
 - name: Install konsave
   become: yes
@@ -23,14 +28,13 @@
   become: yes
   become_user: lydien
   shell: |
-    cd /home/lydien/Git/ansible_bootstrap
     git lfs install && git lfs pull
 
 - name: Unarchive konsave configuration
   become: yes
   become_user: lydien
   unarchive:
-    src: /home/lydien/Git/ansible_bootstrap/files/aritim-dark.tar.gz
+    src: files/aritim-dark.tar.gz
     dest: /home/lydien/.local/share
     remote_src: yes
 
@@ -38,5 +42,5 @@
   become: yes
   become_user: lydien
   shell: |
-    /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/airim-dark.knsv
-    /home/lydien/.local/bin/konsave -a airim-dark
+    /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/aritim-dark.knsv
+    /home/lydien/.local/bin/konsave -a aritim-dark
