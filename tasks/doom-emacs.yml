@@ -7,12 +7,6 @@
     repo: https://github.com/hlissner/doom-emacs
     dest: "/home/lydien/.emacs.d"
 
-- name: Create Doom directory for our private config
-  become: yes
-  become_user: lydien
-  shell: |
-    mkdir -p "/home/lydien/.config/doom"
-
 - name: Run Doom sync to synchronize Doom with the private config
   become: yes
   become_user: lydien
