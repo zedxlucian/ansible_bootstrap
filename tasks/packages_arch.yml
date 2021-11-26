@@ -1,25 +1,31 @@
 ---
+
 - name: Install base-devel to be able to install aur packages
   become: yes
   pacman: state=present name=base-devel
 
-- name: Install login manager lightdm
+- name: Clone yay repo from Archlinux
   become: yes
-  pacman: state=present name=lightdm,lightdm-slick-greeter
+  git: repo=https://aur.archlinux.org/yay.git dest: /opt
 
-- name: Use lightdm-slick-greeter as default greeter for lightdm
+- name: Give ownership to yay repo to user
   become: yes
+  file:
+    src: /opt/yay
+    owner: lydien
+    group: users
+    recurse: yes
+
+- name: Install yay
   shell: |
-    sed -i '/\[Seat\:\*\]/a greeter-session=lightdm-slick-greeter' /etc/lightdm/lightdm.conf
-  notify: enable lightdm
+    cd /opt/yay && makepkg -si --noconfirm
 
 - name: Install packages from pacman
   become: yes
   pacman:
     state: present
     name:
-      - xfce4
-      - xfce4-goodies
+      - plasma
       - dosfstools
       - dunst
       - exfat-utils
@@ -64,16 +70,9 @@
       - openbsd-netcat
       - iptables
       - cronie
-      - firefox
+      - chromium
+      - stow
 
-- name: Install packages from AUR
-  become: yes
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    state: present
-    name:
-      - zsh-autosuggestions
-      - zsh-fast-syntax-highlighting
-      - i3lock-color-git
-      - betterlockscreen
-      - arc-gtk-theme-git
+- name: Install zsh-autosuggestions from AUR
+  shell: |
+    yay -S zsh-autosuggestions zsh-fast-syntax-highlighting betterlockscreen arc-gtk-theme-git --noconfirm
