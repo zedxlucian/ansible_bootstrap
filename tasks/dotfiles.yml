@@ -27,8 +27,12 @@
 
 - name: Export zsh default dir system-wide
   become: yes
-  shell: |
-    echo "export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh" > /etc/zsh/zshenv
+  copy:
+    src: files/zshenv
+    dest: /etc/zsh/zshenv
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
 
 - name: Create dir for zsh history in .cache folder
   become: yes
