@@ -16,4 +16,4 @@
     - include_tasks: tasks/dotfiles.yml
       when: ansible_distribution == "Archlinux"
     - include_tasks: tasks/doom-emacs.yml
-    - include_tasks: tasks/desktop-environment..yml
+    - include_tasks: tasks/desktop-environment.yml
