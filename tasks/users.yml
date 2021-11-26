@@ -26,13 +26,6 @@
     group: users
     mode: '0644'
 
-- name: Create aur_builder user to install AUR packages
-  user:
-    name: aur_builder
-    create_home: no
-    group: users
-    state: absent
-
 - name: create ansible user
   user:
     name: ansible
