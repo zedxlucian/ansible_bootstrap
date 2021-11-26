@@ -13,15 +13,6 @@
   shell: |
     mkdir -p "/home/lydien/.config/doom"
 
-- name: Copy private config from dotfiles to doom directory
-  become: yes
-  become_user: lydien
-  copy:
-    src: "/home/lydien/dotfiles/config/.config/doom"
-    dest: "/home/lydien/.config/"
-    directory_mode: true
-    remote_src: yes
-
 - name: Run Doom sync to synchronize Doom with the private config
   become: yes
   become_user: lydien
