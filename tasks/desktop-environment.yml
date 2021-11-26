@@ -32,20 +32,12 @@
     git lfs install
     git lfs pull
 
-- name: Unarchive konsave configuration
-  become: yes
-  become_user: lydien
-  unarchive:
-    src: /home/lydien/ansible_bootstrap/files/aritim-dark.tar.gz
-    dest: /home/lydien/.local/share
-    remote_src: yes
-
 - name: launch konsave to install KDE configuration
   become: yes
   become_user: lydien
   shell: |
-    /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/airim-dark.knsv
-    /home/lydien/.local/bin/konsave -a airim-dark
+    /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/aritim-dark.knsv
+    /home/lydien/.local/bin/konsave -a aritim-dark
 
 - name: Install desktop files from jumpapp
   become: yes
