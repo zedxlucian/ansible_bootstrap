@@ -1,0 +1,30 @@
+---
+
+- name: Install Python-pip
+  become: yes
+  pacman: name=python-pip state=present
+
+- name: Create bin, share and src directory in home/.local
+  shell: |
+    mkdir -p "/home/lydien/.local/{bin,share,src}"
+
+- name: Install konsave
+  pip: name=konsave state=present
+
+- name: Install git LFS
+  become: yes
+  pacman: name=git-lfs state=present
+
+- name: Git LFS pull konsave configuration
+  shell: |
+    git lfs install && git lfs pull
+
+- name: Unarchive konsave configuration
+  unarchive:
+    src: /home/lydien/ansible_bootstrap/files/airim-dark.tar.gz
+    dest: /home/lydien/.local/share
+    remote_src: yes
+
+- name: launch konsave to install KDE configuration
+  shell: |
+    /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/airim-dark.knsv
