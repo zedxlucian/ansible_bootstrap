@@ -2,7 +2,10 @@
 
 - name: Install base-devel to be able to install aur packages
   become: yes
-  pacman: state=present name=base-devel
+  package: state=present name=base-devel
+  check_mode: true
+  register: basedevel_check
+
 
 - name: Clone yay repo from Archlinux
   become: yes
@@ -21,6 +24,7 @@
   become_user: lydien
   shell: |
     cd /opt/yay && makepkg -si --noconfirm
+  when: not basedevel_check.changed
 
 - name: Install packages from pacman
   become: yes
