@@ -1,9 +1,12 @@
 ---
+- name: Create group users
+  group: name=users state=present
+
 - name: Create lydien user
   user:
     name: lydien
     create_home: yes
-    group: wheel
+    group: users
     shell: /usr/bin/zsh
   when: ansible_distribution == "Archlinux"
 
@@ -20,14 +23,14 @@
     src: git_config_lydien
     dest: /home/lydien/.gitconfig
     owner: lydien
-    group: wheel
+    group: users
     mode: '0644'
 
 - name: Create aur_builder user to install AUR packages
   user:
     name: aur_builder
     create_home: yes
-    group: wheel
+    group: users
 
 - name: Add aur_builder as sudoer
   lineinfile:
