@@ -45,3 +45,12 @@
   shell: |
     /home/lydien/.local/bin/konsave -i /home/lydien/.local/share/airim-dark.knsv
     /home/lydien/.local/bin/konsave -a airim-dark
+
+- name: Install desktop files from jumpapp
+  become: yes
+  become_user: lydien
+  shell: |
+    for entry in /usr/share/applications/{emacs,chromium,org.kde.konsole}.desktop; do
+        target=~/".local/share/applications/$(basename "$entry")"
+        jumpappify-desktop-entry "$entry" >"$target"
+    done
