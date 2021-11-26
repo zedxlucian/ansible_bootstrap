@@ -19,12 +19,6 @@
     cd /home/lydien/dotfiles
     stow config home
 
-- name: Change shell to zsh
-  expect:
-    command: chsh -s /bin/zsh
-    responses:
-      (?i)password: "{{ lydien_password }}"
-
 - name: Export zsh default dir system-wide
   become: yes
   copy:
