@@ -23,14 +23,14 @@
   become: yes
   become_user: lydien
   shell: |
-    cd /home/lydien/ansible_bootstrap
+    cd /home/lydien/Git/ansible_bootstrap
     git lfs install && git lfs pull
 
 - name: Unarchive konsave configuration
   become: yes
   become_user: lydien
   unarchive:
-    src: /home/lydien/ansible_bootstrap/files/aritim-dark.tar.gz
+    src: /home/lydien/Git/ansible_bootstrap/files/aritim-dark.tar.gz
     dest: /home/lydien/.local/share
     remote_src: yes
 
