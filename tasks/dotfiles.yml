@@ -1,6 +1,8 @@
 ---
 
 - name: Clone dotfiles git repo and install
+  become: yes
+  become_user: lydien
   git:
     repo: https://github.com/zedxlucian/dotfiles
     version: master
@@ -15,6 +17,8 @@
     - user-dirs.locale
 
 - name: Stow dotfiles
+  become: yes
+  become_user: lydien
   shell: |
     cd /home/lydien/dotfiles
     stow config home
