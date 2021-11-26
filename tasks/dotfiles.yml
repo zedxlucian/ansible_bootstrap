@@ -6,6 +6,14 @@
     version: master
     dest: /home/lydien/dotfiles
 
+- name: Prepare Desktop environment for stow
+  file:
+    path: /home/lydien/.config/{{ item }}
+    state: absent
+  with_items:
+    - user-dirs.dirs
+    - user-dirs.locale
+
 - name: Stow dotfiles
   shell: |
     cd /home/lydien/dotfiles
@@ -16,3 +24,15 @@
     command: chsh -s /bin/zsh
     responses:
       (?i)password: "{{ lydien_password }}"
+
+- name: Export zsh default dir system-wide
+  become: yes
+  shell: |
+    echo "export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh" > /etc/zsh/zshenv
+
+- name: Create dir for zsh history in .cache folder
+  become: yes
+  become_user: lydien
+  file:
+    path: /home/lydien/.cache/zsh
+    state: present
